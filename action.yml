@@ -63,10 +63,13 @@ runs:
       shell: bash
       run: |
         json_file="vm_parameters.json"
-        property_to_print=".parameters.virtualMachineName.value"
+        virtual_machine_name=".parameters.virtualMachineName.value"
+
+        # virtualMachineRG
 
         # Use jq to extract and print the desired property value
-        result=$(jq -r "$property_to_print" "$json_file")
+        result=$(jq -r "$virtual_machine_name" "$json_file")
 
-        echo "The value of virtualMachineName is: $result"
+        echo "Virtual Machine Properties"
+        echo "Name: $result"
         

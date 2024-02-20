@@ -84,3 +84,6 @@ runs:
         result=$(jq -r "$virtual_machine_size" "$json_file")
         echo "VM Size: $result"
 
+        username=${{ inputs.admin-username }}
+        echo "Admin username: $username"
+

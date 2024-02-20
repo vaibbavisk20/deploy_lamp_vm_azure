@@ -69,11 +69,6 @@ runs:
         echo "Virtual Machine Properties"
         echo "Name: $result"
 
-        # resource group
-        virtual_machine_rg=".parameters.virtualMachineRG.value"
-        result=$(jq -r "$virtual_machine_rg" "$json_file")
-        echo "Resource Group: $result"
-
         # region
         location=".parameters.location.value"
         result=$(jq -r "$location" "$json_file")
@@ -83,7 +78,4 @@ runs:
         virtual_machine_size=".parameters.virtualMachineSize.value"
         result=$(jq -r "$virtual_machine_size" "$json_file")
         echo "VM Size: $result"
-
-        username=${{ inputs.admin-username }}
-        echo "Admin username: $username"
 

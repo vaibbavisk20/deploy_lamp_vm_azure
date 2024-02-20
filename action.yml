@@ -52,3 +52,14 @@ runs:
                     adminUsername=${{ inputs.admin-username }}
                     adminPassword=${{ inputs.admin-password }}
         failOnStdErr: false
+
+    - name: Print specific values from JSON file
+      run: |
+        # Replace 'path/to/your/json/file.json' and '.property.to.print' with your actual JSON file path and property path
+        json_file="path/to/your/json/file.json"
+        property_to_print=".property.to.print"
+
+        # Use jq to extract and print the desired property value
+        result=$(jq -r "$property_to_print" "$json_file")
+
+        echo "The value of $property_to_print is: $result"

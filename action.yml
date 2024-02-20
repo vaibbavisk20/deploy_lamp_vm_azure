@@ -63,13 +63,24 @@ runs:
       shell: bash
       run: |
         json_file="vm_parameters.json"
+        # vm name
         virtual_machine_name=".parameters.virtualMachineName.value"
-
-        # virtualMachineRG
-
-        # Use jq to extract and print the desired property value
         result=$(jq -r "$virtual_machine_name" "$json_file")
-
         echo "Virtual Machine Properties"
         echo "Name: $result"
-        
+
+        # resource group
+        virtual_machine_rg=".parameters.virtualMachineRG.value"
+        result=$(jq -r "$virtual_machine_rg" "$json_file")
+        echo "Resource Group: $result"
+
+        # region
+        location=".parameters.location.value"
+        result=$(jq -r "$location" "$json_file")
+        echo "Location: $result"
+
+        # vm size
+        virtual_machine_size=".parameters.virtualMachineSize.value"
+        result=$(jq -r "$virtual_machine_size" "$json_file")
+        echo "VM Size: $result"
+

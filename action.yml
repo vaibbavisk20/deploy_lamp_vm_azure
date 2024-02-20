@@ -53,14 +53,20 @@ runs:
                     adminPassword=${{ inputs.admin-password }}
         failOnStdErr: false
 
-    - name: Print specific values from JSON file
+    - name: Fetch JSON file from remote repository
       shell: bash
       run: |
-        # Replace 'path/to/your/json/file.json' and '.property.to.print' with your actual JSON file path and property path
-        json_file=https://raw.githubusercontent.com/vaibbavisk20/deploy_lamp_vm_azure/main/vm_parameters.json
+        json_url="https://raw.githubusercontent.com/vaibbavisk20/deploy_lamp_vm_azure/main/vm_parameters.json"
+        curl -sSLO $json_url
+
+    - name: Print parameter value
+      shell: bash
+      run: |
+        json_file="vm_parameters.json"
         property_to_print=".parameters.virtualMachineName.value"
 
         # Use jq to extract and print the desired property value
         result=$(jq -r "$property_to_print" "$json_file")
 
-        echo "The value of $property_to_print is: $result"
+        echo "The value of virtualMachineName is: $result"
+        

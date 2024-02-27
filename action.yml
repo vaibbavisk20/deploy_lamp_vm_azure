@@ -47,35 +47,35 @@ runs:
       with:
         subscriptionId: ${{ inputs.subscription-id }}
         resourceGroupName: ${{ inputs.resource-group-name }}
-        template: https://raw.githubusercontent.com/vaibbavisk20/deploy_lamp_vm_azure/main/vm_template.json
-        parameters: https://raw.githubusercontent.com/vaibbavisk20/deploy_lamp_vm_azure/main/vm_parameters.json
-                    adminUsername=${{ inputs.admin-username }}
-                    adminPassword=${{ inputs.admin-password }}
+        template: https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/application-workloads/wordpress/wordpress-single-vm-ubuntu/azuredeploy.json
+        parameters: https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/application-workloads/wordpress/wordpress-single-vm-ubuntu/azuredeploy.parameters.json
+                    mySqlPassword=${{ inputs.admin-password }}
+                    adminPasswordOrKey=${{ inputs.admin-password }}
         failOnStdErr: false
 
-    - name: Fetch JSON file from remote repository
-      shell: bash
-      run: |
-        json_url="https://raw.githubusercontent.com/vaibbavisk20/deploy_lamp_vm_azure/main/vm_parameters.json"
-        curl -sSLO $json_url
+    # - name: Fetch JSON file from remote repository
+    #   shell: bash
+    #   run: |
+    #     json_url="https://raw.githubusercontent.com/vaibbavisk20/deploy_lamp_vm_azure/main/vm_parameters.json"
+    #     curl -sSLO $json_url
 
-    - name: Print parameter value
-      shell: bash
-      run: |
-        json_file="vm_parameters.json"
-        # vm name
-        virtual_machine_name=".parameters.virtualMachineName.value"
-        result=$(jq -r "$virtual_machine_name" "$json_file")
-        echo "Virtual Machine Properties"
-        echo "Name: $result"
+    # - name: Print parameter value
+    #   shell: bash
+    #   run: |
+    #     json_file="vm_parameters.json"
+    #     # vm name
+    #     virtual_machine_name=".parameters.virtualMachineName.value"
+    #     result=$(jq -r "$virtual_machine_name" "$json_file")
+    #     echo "Virtual Machine Properties"
+    #     echo "Name: $result"
 
-        # region
-        location=".parameters.location.value"
-        result=$(jq -r "$location" "$json_file")
-        echo "Location: $result"
+    #     # region
+    #     location=".parameters.location.value"
+    #     result=$(jq -r "$location" "$json_file")
+    #     echo "Location: $result"
 
-        # vm size
-        virtual_machine_size=".parameters.virtualMachineSize.value"
-        result=$(jq -r "$virtual_machine_size" "$json_file")
-        echo "VM Size: $result"
+    #     # vm size
+    #     virtual_machine_size=".parameters.virtualMachineSize.value"
+    #     result=$(jq -r "$virtual_machine_size" "$json_file")
+    #     echo "VM Size: $result"
 

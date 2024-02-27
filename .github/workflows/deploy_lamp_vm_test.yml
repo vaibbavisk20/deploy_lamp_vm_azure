@@ -1,4 +1,4 @@
-name: workflow to deploy lamp stack on azure
+name: Workflow to deploy a Wordpress VM on Azure
 
 on:
   push:
